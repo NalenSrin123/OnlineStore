@@ -44,21 +44,21 @@
 
               <!-- Sign In Form -->
               <form method="post" enctype="multipart/form-data">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingName" placeholder="username" name="name">
+                <div class="form-group mb-3">
                   <label for="floatingName">Username</label>
+                  <input type="text" class="form-control" id="floatingName" placeholder="username" name="name">
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email">
+                <div class="form-group mb-3">
                   <label for="floatingEmail">Email</label>
+                  <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email">
                 </div>
-                <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <div class="form-group mb-3">
                   <label for="floatingPassword">Password</label>
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                 </div>
                 <div class="form-group mb-3">
                     <label for="floatingProfile">Profile</label>
-                  <input type="file" class="form-control" id="floatingProfile" name="profile">
+                    <input type="file" class="form-control " id="floatingProfile" name="profile">
                 </div>
                 <div class="d-grid ">
                     <div class="text-center">
