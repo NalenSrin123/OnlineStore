@@ -63,7 +63,7 @@
                 <div class="d-grid ">
                   <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit" name="signIn">Sign in</button>
                   <div class="text-center">
-                    <a class="small" href="#">Forgot password?</a>
+                    <a class="small" href="forgotPassword.php">Forgot password?</a>
                   </div>
                   <div class="text-center">
                     <a class="small" style="text-decoration: none;" href="register.php">Don`t have account?</a>
@@ -96,6 +96,7 @@
                     header('location: dashboard.php');
                     exit(); // Ensure no further code is executed after redirection
                 } else {
+                    /* The `echo` statement in PHP is used to output strings or variables. In this case, the `echo` statement is outputting a JavaScript code block enclosed in single quotes. This JavaScript code block is using the `Swal.fire()` function from the SweetAlert2 library to display a pop-up modal with an error message. */
                     echo '<script>
                             Swal.fire({
                                 title: "Error!",

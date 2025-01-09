@@ -83,12 +83,9 @@ if(empty($_SESSION['mail'])){
    </div> 
 </body>
 </html>
-
-
 <?php 
 include '../conection.php';
 include 'moveFile.php';
-session_start();
 
 if (!isset($_SESSION['mail'])) {
     die("User not logged in.");
@@ -124,12 +121,13 @@ if (isset($_POST['save'])) {
                      </script>';
           }
      }else{
-          echo '<script>
-                         Swal.fire({
-                              title: "Please enter value!",
-                              icon: "error"
-                         });
-                     </script>';
+          echo '
+               <script>
+                    Swal.fire({
+                         title: "Please enter value!",
+                         icon: "error"
+                    });
+               </script>';
      }
     
 }

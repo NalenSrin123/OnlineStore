@@ -24,7 +24,57 @@ if(empty($_SESSION['mail'])){
         include 'aside.php'
     ?>
     <div class="section">
-        
+    <div class="professor">
+    <div class="title">
+        <h3>ការលក់</h3>
+    </div>
+    <div class="container-fluid px-0 py-1" >
+    <table class="table  align-middle text-center mt-4 " style="table-layout: fixed;">
+        <thead>
+            <tr>
+                <th>ល.រ</th>
+                <th>ឈ្មោះ</th>
+                <th>តម្លៃដើម</th>
+                <th>តម្លៃលក់</th>
+                <th>ចំនួន</th>
+                <th>ប្រភេទ</th>
+                <th>រូបភាព</th>
+                <th>អ្នកបញ្ចូល</th>
+                <th>សកម្មភាព</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                include '../conection.php';
+                global $con;
+                $selectUser="SELECT `profile` FROM `tbl_user` WHERE `email`='{$_SESSION['mail']}'";
+                $profile=$con->query($selectUser);
+                while($row=$profile->fetch_assoc()){
+                    $profiles= $row['profile'];
+                }
+                $selectProduct="SELECT * FROM `tbl_product`";
+                $data=$con->query($selectProduct);
+                while($row=$data->fetch_assoc()){
+                    echo '<tr>
+                            <td>'.$row['product_id'].'</td>
+                            <td>'.$row['name'].'</td>
+                            <td>'.$row['reqular_price'].'</td>
+                            <td>'.$row['sale_price'].'</td>
+                            <td>'.$row['qty'].'</td>
+                            <td>'.$row['category'].'</td>
+                            <td><img width="60px" class="rounded" src="../Image/'.$row['image'].'" alt=""></td>
+                            <td><img width="60px" class="rounded" src="../Image/'.$profiles.'" alt=""></td>
+                            <td>
+                                <i class="bi bi-pencil-square me-1"></i>
+                                <i class="bi bi-trash text-danger"></i>
+                            </td>
+                        </tr>';
+                }
+            ?>
+        </tbody>
+    </table>
+    </div>
+</div>
     </div>
     
    </div> 
