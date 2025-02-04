@@ -93,6 +93,7 @@
             try {
                 if ($row && isset($row['email']) && $row['email'] == $email) {
                     $_SESSION['mail'] = $email;
+                    $_SESSION['role']=$row['role'];
                     header('location: dashboard.php');
                     exit(); // Ensure no further code is executed after redirection
                 } else {
