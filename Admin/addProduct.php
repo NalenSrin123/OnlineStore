@@ -21,10 +21,12 @@ if(empty($_SESSION['mail'])){
 </head>
 <body>
 <?php 
-            if($_SESSION['mail']=="nalensrin480@gmail.com"){
+            if($_SESSION['role']=="admin"){
                 include 'aside.php';
-            }else{
+            }elseif($_SESSION['role']=="staff"){
                 include 'asideStaff.php';
+            }else{
+                header('location: ../User/index.php');
             }    
             ?>
             <div class="section">

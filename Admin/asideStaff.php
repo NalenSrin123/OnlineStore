@@ -13,7 +13,7 @@
                             </ul>
                         </div>
                     </li>
-                    <!-- <li><a href="staff.php" id="staff"><i class="fa-solid fa-users me-2"></i>អ្នកប្រើប្រាស់</a></li> -->
+                    <li class="d-none"><a href="staff.php" id="staff" ><i class="fa-solid fa-users me-2"></i>អ្នកប្រើប្រាស់</a></li>
                     <li id="account"><a href="#" ><i class="fa-solid fa-user me-2"></i>គណនី</a>
                         <div class="w-100 popup-menu">
                             <ul>

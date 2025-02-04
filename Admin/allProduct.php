@@ -25,6 +25,8 @@ if(empty($_SESSION['mail'])){
                 include 'aside.php';
             }elseif($_SESSION['role']=="staff"){
                 include 'asideStaff.php';
+            }else{
+                header('location: ../User/index.php');
             }    
             ?>
     <div class="section">

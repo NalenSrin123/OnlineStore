@@ -37,6 +37,7 @@ if(empty($_SESSION['mail'])){
                                 <th>EMAIL</th>
                                 <th>PASSWORD</th>
                                 <th>PROFILE</th>
+                                <th>ROLE</th>
                                 <th>សកម្មភាព</th>
                             </tr>
                         </thead>
@@ -52,7 +53,34 @@ if(empty($_SESSION['mail'])){
                 </div>
         </main>
    </div> 
+   <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this user?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+            <input type="hidden" name="remove_user" id="remove_user">
+            <button type="submit" class="btn btn-primary" name="deleteUser">Yes, delete it.</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>
+<script>
+    $(document).ready(function(){
+        $(document).on('click','#delete',function(){
+            $id=$(this).attr('data_id');
+            $('#remove_user').val($id)
+        })
+    })
+</script>
 
 
