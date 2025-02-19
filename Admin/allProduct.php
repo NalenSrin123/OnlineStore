@@ -32,7 +32,7 @@ if(empty($_SESSION['mail'])){
     <div class="section">
     <div class="professor">
     <div class="title">
-        <h3>ការលក់</h3>
+        <h3>ផលិតផល</h3>
     </div>
     <div class="container-fluid px-0 py-1" >
     <table class="table  align-middle text-center mt-4 " style="table-layout: fixed;">
@@ -50,9 +50,13 @@ if(empty($_SESSION['mail'])){
             </tr>
         </thead>
         <tbody>
+
             <?php
                 include '../conection.php';
-                global $con;
+                if(searchProduct()){
+                    
+                }else{
+                    global $con;
                 $selectUser="SELECT `profile` FROM `tbl_user` WHERE `email`='{$_SESSION['mail']}'";
                 $profile=$con->query($selectUser);
                 while($row=$profile->fetch_assoc()){
@@ -71,11 +75,13 @@ if(empty($_SESSION['mail'])){
                             <td><img width="60px" class="rounded" src="../Image/'.$row['image'].'" alt=""></td>
                             <td><img width="60px" class="rounded" src="../Image/'.$profiles.'" alt=""></td>
                             <td>
-                                <i class="bi bi-pencil-square me-1"></i>
-                                <i class="bi bi-trash text-danger"></i>
+                                <a href="editProduct.php?id='.$row['product_id'].'"><i class="bi bi-pencil-square me-1" style="cursor: pointer;" ></i></a>
+                                <i class="bi bi-trash text-danger" style="cursor: pointer;" id="delete"  data_id="'.$row['product_id'].'"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
                             </td>
                         </tr>';
                 }
+                }
+                
             ?>
         </tbody>
     </table>
@@ -84,5 +90,83 @@ if(empty($_SESSION['mail'])){
     </div>
     
    </div> 
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this user?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+            <input type="hidden" name="remove_product" id="remove_product">
+            <button type="submit" class="btn btn-primary" name="deleteProduct">Yes, delete it.</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>
+<script>
+    $(document).ready(function(){
+        $(document).on('click','#delete',function(){
+            $id=$(this).attr('data_id');
+            $('#remove_product').val($id)
+        })
+    })
+</script>
+<?php 
+function deleteProduct(){
+    if(isset($_POST['deleteProduct'])){
+        $id=$_POST['remove_product'];
+        global $con;
+        $deleteProduct="DELETE FROM `tbl_product` WHERE `product_id`='$id'";
+        $result=$con->query($deleteProduct);
+        if($result){
+            echo '<script>window.location.href="allProduct.php"</script>';
+        }
+    }
+}
+deleteProduct();
+function searchProduct(){
+    global $con;
+  if(isset($_GET['name'])){
+    $name=$_GET['name'];
+    $selectUser="SELECT `profile` FROM `tbl_user` WHERE `email`='{$_SESSION['mail']}'";
+    $profile=$con->query($selectUser);
+    while($row=$profile->fetch_assoc()){
+        $profiles= $row['profile'];
+    }
+    $search="SELECT * FROM `tbl_product` WHERE `name` LIKE '%$name%'";
+    $result=$con->query($search);
+    while($row=$result->fetch_assoc()){
+        echo '<tr>
+                <td>'.$row['product_id'].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['reqular_price'].'</td>
+                <td>'.$row['sale_price'].'</td>
+                <td>'.$row['qty'].'</td>
+                <td>'.$row['category'].'</td>
+                <td><img width="60px" class="rounded" src="../Image/'.$row['image'].'" alt=""></td>
+                <td><img width="60px" class="rounded" src="../Image/'.$profiles.'" alt=""></td>
+                <td>
+                    <a href="editProduct.php?id='.$row['product_id'].'"><i class="bi bi-pencil-square me-1" style="cursor: pointer;" ></i></a>
+                    <i class="bi bi-trash text-danger" style="cursor: pointer;" id="delete"  data_id="'.$row['product_id'].'"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                </td>
+            </tr>';
+    }
+  }
+  if(!empty($result)){
+    return true;
+  }else{
+   
+    return false;
+  }
+}
+
+
+
+?>

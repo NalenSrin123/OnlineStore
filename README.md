@@ -1,1 +1,21 @@
-# OnlineStore
+# Online Store is the sample project that build for small shop.
+OnlineStore
+    |_Admin
+        |_login.php
+        |_logout.php
+        |_register.php
+        |_forgotPassword.php
+        |_otp.php
+        |_function.php
+        |_moveFile.php
+        |_addProduct.php
+        |_allProduct.php
+        |_aside.php
+        |_asideStaff.php
+        |_dashboard.php
+        |_dashboard1.php
+        |_sale.php
+        |_staff.php
+        |_editUser.php
+        |_viewPost.php
+    |_User

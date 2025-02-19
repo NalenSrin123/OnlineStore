@@ -1,4 +1,5 @@
 <?php 
+ob_start(); 
 session_start();
 if(empty($_SESSION['mail'])){
     header('location: login.php');
@@ -6,6 +7,7 @@ if(empty($_SESSION['mail'])){
 ?>
 <?php
 include '../conection.php'; // Include database connection
+include './moveFile.php';
 
 $user = null; // Default value
 
@@ -52,7 +54,8 @@ if (isset($_GET['id'])) {
                     <div class="row mb-4">
                          <div class="col-6">
                               <label class="" for="user_id">User ID</label>
-                              <input type="text" name="user_id" id="user_id" class="form-control" disabled value="<?php echo $user['user_id'] ?>">
+                              <input type="text" name="id" id="user_id" class="form-control" readonly value="<?php echo $user['user_id']; ?>">
+
                          </div>
                          <div class="col-6">
                               <label class="" for="user_name">User Name</label>
@@ -81,7 +84,7 @@ if (isset($_GET['id'])) {
                          <div class="col-6">
                          <label>Profile</label>
                         <input type="file" name="profile" class="form-control" >
-                        <input type="hidden" name="hide_profile" value="<?php echo $user['profile'] ?>">
+                        <input type="hidden" name="hide_profile" value="<?php echo $user['profile'];?>">
                         <img width="80px" src="../Image/<?php echo $user['profile'] ?>" alt="">
                          </div>
                     </div>
@@ -99,7 +102,59 @@ if (isset($_GET['id'])) {
 </body>
 </html>
 <?php 
-    
+    if(isset($_POST['save'])){
+          $ID=$_POST['id'];
+          $userName=$_POST['user_name'];
+          if(isset($_POST['save'])){
+               $ID = $_POST['id'];
+               $userName = $_POST['user_name'];
+               $email = $_POST['email'];
+               $password = $_POST['password'];
+               $role = $_POST['role'];
+               $hide_image=$_POST['hide_profile'];
+            
+               // Attempt to upload a new image
+               $profile =$_FILES['profile']['name'];
+           
+               // If no new image is uploaded, use the hidden profile
+               if($profile=='') {
+                   $profile = $hide_image; 
+               }else{
+                    $profile=moveFile('profile');
+               }
+              
+               $editUser = "UPDATE `tbl_user` 
+                            SET `userName`='$userName', 
+                                `email`='$email', 
+                                `password`='$password', 
+                                `profile`='$profile', 
+                                `role`='$role' 
+                            WHERE `user_id`='$ID'";
+           
+               global $con;
+               $result = $con->query($editUser);
+           
+               if ($result) {
+                   echo '<script>
+                       Swal.fire({
+                           title: "Update user success!",
+                           icon: "success"
+                       });
+                   </script>';
+                   header("Location: staff.php");
+                   exit();
+               } else {
+                   echo '<script>
+                       Swal.fire({
+                           title: "Error!",
+                           icon: "error"
+                       });
+                   </script>';
+               }
+           }
+          }
+           
+    ob_end_flush();
 ?>
 
 

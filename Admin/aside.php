@@ -28,8 +28,10 @@
         <main>
             <div class="header">
                 <div class="search">
-                    <input type="search" name="" id="" placeholder="what do you want to find?">
-                    <button>Search</button>
+                    <form action="" method="get" class="d-flex">
+                        <input type="search" name="name" id="" placeholder="Search...">
+                        <button name="search" type="submit">Search</button>
+                    </form>
                 </div>
                 <div class="user">
                     <nav class="navbar  navbar-expand-lg navbar-light">

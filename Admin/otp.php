@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (isset($_POST['verify'])) {
     $entered_otp = $_POST['otp'];
 
